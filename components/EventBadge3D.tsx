@@ -34,27 +34,22 @@ export default function App() {
 
   useEffect(() => {
     // Small helper to set ready with a tiny delay so the preloader DOM is fully removed
-    const markReady = (delay = 200) => setTimeout(() => setReady(true), delay)
+    const markReady = (delay = 400) => setTimeout(() => setReady(true), delay)
 
     // If preloader has already been shown in this session, mount after a short delay
     const hasSeenPreloader = typeof window !== 'undefined' && sessionStorage.getItem('preloaderShown')
     if (hasSeenPreloader) {
-      const t0 = markReady(200)
+      const t0 = markReady(400)
       return () => clearTimeout(t0 as unknown as number)
     }
 
-    // Otherwise wait for the preloaderComplete event
-    const handler = () => markReady(200)
-    window.addEventListener('preloaderComplete', handler)
-    // Fallback: after 6s ensure it mounts (defensive)
-    const t = setTimeout(() => markReady(200), 6000)
+    const t = setTimeout(() => markReady(400), 8500)
     return () => {
-      window.removeEventListener('preloaderComplete', handler)
       clearTimeout(t)
     }
   }, [])
 
-  
+
 
   if (!ready) return null
 
@@ -171,19 +166,19 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
             position={[0, -1.2, -0.05]}
             {...(isInteractive
               ? {
-                  onPointerOver: () => hover(true),
-                  onPointerOut: () => hover(false),
-                  onPointerUp: (e: ThreeEvent<PointerEvent>) => {
-                    const target = e.target as HTMLElement
-                    target?.releasePointerCapture(e.pointerId)
-                    drag(false)
-                  },
-                  onPointerDown: (e: ThreeEvent<PointerEvent>) => {
-                    const target = e.target as HTMLElement
-                    target?.setPointerCapture(e.pointerId)
-                    drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
-                  },
-                }
+                onPointerOver: () => hover(true),
+                onPointerOut: () => hover(false),
+                onPointerUp: (e: ThreeEvent<PointerEvent>) => {
+                  const target = e.target as HTMLElement
+                  target?.releasePointerCapture(e.pointerId)
+                  drag(false)
+                },
+                onPointerDown: (e: ThreeEvent<PointerEvent>) => {
+                  const target = e.target as HTMLElement
+                  target?.setPointerCapture(e.pointerId)
+                  drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
+                },
+              }
               : {})}
           >
             <mesh geometry={nodes.card.geometry}>
@@ -204,19 +199,16 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
               center
               distanceFactor={1.3}
               transform
-              style={{
-                pointerEvents: 'none',
-                userSelect: 'none',
-                zIndex: 1,
-              }}
+              pointerEvents="none"
+              zIndexRange={[0, 0]}
             >
-              <div className="flex flex-col items-center gap-3 w-44 relative z-1">
-                <div className="size-28 md:size-32 rounded-full overflow-hidden border-2 border-white bg-white">
+              <div className="pointer-events-none flex flex-col items-center gap-3 w-44 relative z-1">
+                <div className="size-28 md:size-32 rounded-full overflow-hidden border-2 border-white">
                   <Image
                     src="/imgs/profile.jpeg"
                     alt="Natnael Profile"
-                    width={128}
-                    height={128}
+                    width={300}
+                    height={300}
                     unoptimized
                     priority
                     className="w-full h-full object-cover"

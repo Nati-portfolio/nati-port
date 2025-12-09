@@ -1,6 +1,5 @@
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
-import PreloaderWrapper from "@/components/PreloaderWrapper";
 import SmoothScrolling from "@/utils/SmoothScroll";
 import type { Metadata } from "next";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
@@ -22,11 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <NuqsAdapter>
           <SmoothScrolling>
-            <PreloaderWrapper>
-              <Navigation />
-              {children}
-              <Footer />
-            </PreloaderWrapper>
+            <Navigation />
+            {children}
+            <Footer />
           </SmoothScrolling>
         </NuqsAdapter>
       </body>

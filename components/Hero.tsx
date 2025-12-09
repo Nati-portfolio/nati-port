@@ -88,7 +88,7 @@ export function Hero({ ctas, startAnimation }: HeroProps) {
                 target={cta.external ? "_blank" : undefined}
                 rel={cta.external ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "inline-flex relative z-50 items-center justify-center px-6 py-3 rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 font-manrope",
+                  "inline-flex relative z-40 items-center justify-center px-6 py-3 rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 font-manrope",
                   cta.variant === "primary" &&
                   "bg-emerald-700 text-white hover:bg-emerald-800 focus:ring-emerald-500",
                   cta.variant === "secondary" &&
@@ -109,7 +109,7 @@ export function Hero({ ctas, startAnimation }: HeroProps) {
                 target={cta.external ? "_blank" : undefined}
                 rel={cta.external ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "inline-flex relative z-50 items-center justify-center px-6 py-3 rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 font-manrope",
+                  "inline-flex relative z-40 items-center justify-center px-6 py-3 rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 font-manrope",
                   cta.variant === "primary" &&
                   "bg-emerald-700 text-white hover:bg-emerald-800 focus:ring-emerald-500",
                   cta.variant === "secondary" &&
